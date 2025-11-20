@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火事からまちを守る！ 3年生にできること</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"M PLUS Rounded 1c"', '"BIZ UDPGothic"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#FF6B35',
+                            yellow: '#F7C548',
+                            blue: '#2E86AB',
+                            green: '#55D6BE',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FFF5F0; /* Very light orange background */
+            background-image: radial-gradient(#FFD1BC 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Custom Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+
+        /* Card Hover Effects */
+        .nav-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        /* Ruby Text Styling */
+        rt {
+            font-size: 0.6em;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <div class="container max-w-5xl mx-auto p-4 sm:p-6 flex-grow">
+        
+        <!-- Header -->
+        <header class="text-center mb-8 relative">
+            <div class="bg-white rounded-3xl shadow-lg p-6 sm:p-8 border-b-8 border-brand-orange relative overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                <!-- Decorative Background Elements -->
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400"></div>
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-100 rounded-full opacity-50"></div>
+                <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-orange-100 rounded-full opacity-50"></div>
+
+                <div class="relative z-10">
+                    <div class="inline-block animate-float mb-2">
+                        <span class="text-5xl filter drop-shadow-md">🚒</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-gray-800 mb-3 tracking-tight">
+                        <span class="text-brand-orange inline-block transform hover:rotate-3 transition-transform">火事</span>から
+                        <span class="text-brand-blue inline-block transform hover:-rotate-3 transition-transform">まち</span>を
+                        <span class="text-brand-green inline-block transform hover:rotate-3 transition-transform">守る</span>！
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-600">
+                        3<ruby>年生<rt>ねんせい</rt></ruby>にできること
+                    </p>
+                    <div class="mt-4 inline-flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-full text-orange-700 text-sm font-bold border border-orange-200">
+                        <span>🏫</span>
+                        <span>小学校 3年生 社会科</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Home View -->
+            <div id="home-view" class="animate-pop">
+                <!-- Intro Message -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 mb-8 text-center border border-white shadow-sm">
+                    <p class="text-lg sm:text-xl font-bold text-gray-700">
+                        <ruby>火事<rt>かじ</rt></ruby>を<ruby>防<rt>ふせ</rt></ruby>ぐために、みんなができることを<ruby>学<rt>まな</rt></ruby>びましょう。<br>
+                        <span class="text-brand-orange">知りたいカードをおしてね！</span>
+                    </p>
+                </div>
+                
+                <!-- Grid Navigation -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    
+                    <!-- Card 1: Community -->
+                    <div class="nav-card group bg-white rounded-2xl p-6 cursor-pointer shadow-md border-2 border-transparent hover:border-blue-400 relative overflow-hidden" data-category="community">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner group-hover:rotate-6 transition-transform">
+                                🤝
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                <ruby>地域<rt>ちいき</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>と
+                            </h2>
+                            <p class="text-sm text-gray-500 font-medium">
+                                <ruby>避難訓練<rt>ひなんくんれん</rt></ruby>や<ruby>消防団<rt>しょうぼうだん</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: Doors -->
+                    <div class="nav-card group bg-white rounded-2xl p-6 cursor-pointer shadow-md border-2 border-transparent hover:border-red-400 relative overflow-hidden" data-category="doors">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-red-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner group-hover:rotate-6 transition-transform">
+                                🚪
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-red-600 transition-colors">
+                                <ruby>安全<rt>あんぜん</rt></ruby>な<ruby>逃<rt>に</rt></ruby>げ<ruby>道<rt>みち</rt></ruby>
+                            </h2>
+                            <p class="text-sm text-gray-500 font-medium">
+                                <ruby>防火扉<rt>ぼうかとびら</rt></ruby>や<ruby>廊下<rt>ろうか</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Fire Check -->
+                    <div class="nav-card group bg-white rounded-2xl p-6 cursor-pointer shadow-md border-2 border-transparent hover:border-orange-400 relative overflow-hidden" data-category="fire_check">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-orange-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner group-hover:rotate-6 transition-transform">
+                                🔥
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors">
+                                <ruby>火<rt>ひ</rt></ruby>の<ruby>元<rt>もと</rt></ruby>チェック
+                            </h2>
+                            <p class="text-sm text-gray-500 font-medium">
+                                コンロや<ruby>警報器<rt>けいほうき</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Cleaning -->
+                    <div class="nav-card group bg-white rounded-2xl p-6 cursor-pointer shadow-md border-2 border-transparent hover:border-teal-400 relative overflow-hidden" data-category="cleaning">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner group-hover:rotate-6 transition-transform">
+                                🧹
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-teal-600 transition-colors">
+                                お<ruby>掃除<rt>そうじ</rt></ruby>も<ruby>防火<rt>ぼうか</rt></ruby>
+                            </h2>
+                            <p class="text-sm text-gray-500 font-medium">
+                                コンセントの<ruby>埃<rt>ほこり</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 5: Planning -->
+                    <div class="nav-card group bg-white rounded-2xl p-6 cursor-pointer shadow-md border-2 border-transparent hover:border-purple-400 relative overflow-hidden" data-category="planning">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-purple-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner group-hover:rotate-6 transition-transform">
+                                📝
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
+                                <ruby>計画<rt>けいかく</rt></ruby>しよう
+                            </h2>
+                            <p class="text-sm text-gray-500 font-medium">
+                                ポスターや<ruby>標語<rt>ひょうご</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Telling -->
+                    <div class="nav-card group bg-white rounded-2xl p-6 cursor-pointer shadow-md border-2 border-transparent hover:border-pink-400 relative overflow-hidden" data-category="telling">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-pink-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner group-hover:rotate-6 transition-transform">
+                                📢
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors">
+                                みんなに<ruby>伝<rt>つた</rt></ruby>えよう
+                            </h2>
+                            <p class="text-sm text-gray-500 font-medium">
+                                <ruby>家族<rt>かぞく</rt></ruby>への<ruby>呼<rt>よ</rt></ruby>びかけ
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Category View (Initially Hidden) -->
+            <div id="category-view" class="hidden animate-fadeIn">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden min-h-[500px]">
+                    <div id="category-header" class="p-5 bg-gray-100 transition-colors duration-300 flex items-center">
+                        <button id="back-button" class="bg-white/90 hover:bg-white text-gray-800 font-bold py-2 px-6 rounded-full shadow-sm transition-all flex items-center gap-2 hover:scale-105 active:scale-95">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            もどる
+                        </button>
+                    </div>
+                    <div id="category-content" class="p-6 sm:p-10 lg:p-12">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pb-8">
+            <div class="inline-block bg-white/80 backdrop-blur rounded-2xl shadow-sm p-4 border border-white">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="glossary.html" class="flex items-center gap-2 bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-105">
+                        <span>📚</span>
+                        <ruby>用語集<rt>ようごしゅう</rt></ruby>
+                    </a>
+                    <button id="sources-button" class="flex items-center gap-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-105">
+                        <span>📖</span>
+                        <ruby>参考資料<rt>さんこうしりょう</rt></ruby>
+                    </button>
+                </div>
+                <p class="mt-4 text-gray-500 text-xs">
+                    © 2023 <ruby>社会科<rt>しゃかいか</rt></ruby>ウェブサイト
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Sources Modal -->
+    <div id="sources-modal" class="modal items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden flex flex-col animate-pop">
+            <div class="bg-indigo-600 p-6 flex justify-between items-center shrink-0">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <span>📖</span>
+                    <ruby>参考資料<rt>さんこうしりょう</rt></ruby>
+                </h2>
+                <button id="close-modal" class="text-white/80 hover:text-white hover:bg-indigo-500 rounded-full p-2 transition-all">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="p-6 sm:p-8 overflow-y-auto custom-scrollbar">
+                <div class="space-y-8">
+                    <!-- Section 1 -->
+                    <div class="relative pl-6 border-l-4 border-blue-200">
+                        <h3 class="text-lg font-bold text-blue-800 mb-4">🏫 学校の取り組み</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="https://school.e-tokushima.or.jp/es_handa/news/1021798/" target="_blank" class="block p-3 rounded-lg hover:bg-blue-50 transition-colors group">
+                                    <div class="font-bold text-gray-800 group-hover:text-blue-600">徳島県つるぎ町立半田小学校</div>
+                                    <div class="text-sm text-gray-500">学校の防火施設・設備調べ（3年生）</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.sioshou.jp/p2/p2-4-3/" target="_blank" class="block p-3 rounded-lg hover:bg-blue-50 transition-colors group">
+                                    <div class="font-bold text-gray-800 group-hover:text-blue-600">長野県塩尻市立塩尻小学校</div>
+                                    <div class="text-sm text-gray-500">防火・防災教育の取り組み</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div class="relative pl-6 border-l-4 border-green-200">
+                        <h3 class="text-lg font-bold text-green-800 mb-4">🚒 消防クラブ・自治体</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="https://www.n-bouka.or.jp/club/pdf/bfc_jirei_2.pdf" target="_blank" class="block p-3 rounded-lg hover:bg-green-50 transition-colors group">
+                                    <div class="font-bold text-gray-800 group-hover:text-green-600">日本防火・防災協会</div>
+                                    <div class="text-sm text-gray-500">少年消防クラブ（BFC）活動事例集</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.city.ichihara.chiba.jp/article?articleId=60237d40ece4651c88c18f7b" target="_blank" class="block p-3 rounded-lg hover:bg-green-50 transition-colors group">
+                                    <div class="font-bold text-gray-800 group-hover:text-green-600">千葉県市原市消防局</div>
+                                    <div class="text-sm text-gray-500">住宅用火災警報器の点検啓発</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                    <p class="text-xs text-gray-400">
+                        ※リンク先は外部サイトです。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
